@@ -46,22 +46,35 @@ Semua transaksi tercatat di file transactions.json.
 Riwayat bisa ditampilkan kembali lewat menu utama.
 
 Struktur Folder
+
 grocery_store/
+
 │
 ├── main.py              # Titik awal program
+
 ├── menu.py              # Class Menu (navigasi dan kontrol utama)
+
 ├── products.py          # Class Product & ProductManager (CRUD produk)
+
 ├── transactions.py      # Class Transaction & TransactionManager
+
 ├── discounts.py         # Class DiscountBase, PercentDiscount, NominalDiscount
+
 ├── payments.py          # Class PaymentBase, CashPayment, CardPayment
+
 ├── utils.py             # FileHandler, Validator, helper umum
+
 │
 ├── data/
+
 │   ├── products.json        # Penyimpanan data produk
+
 │   └── transactions.json    # Penyimpanan riwayat transaksi
+
 │
 └── receipts/
     └── ... (file struk transaksi)
+    
 
 | Konsep             | Implementasi                                                                                                             |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -79,7 +92,11 @@ grocery_store/
 5. Ikuti menu yang tampil untuk mengelola produk, transaksi, dan pembayaran.
 
 Modul yang Digunakan
+
 re — validasi input menggunakan Regular Expression
+
 time — menampilkan waktu transaksi
+
 json — penyimpanan data produk dan transaksi
+
 os, sys — pengelolaan file dan terminal
