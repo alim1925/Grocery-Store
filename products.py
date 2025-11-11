@@ -56,3 +56,49 @@ class ProductManager:
 
     def find(self, pid:int):
         return next((p for p in self.products if p.id == pid), None)
+
+    def edit_product(self):
+        try:
+            self.list_products()
+            pid = int(input("Masukkan ID produk yang ingin diubah: ").strip())
+            p = self.find(pid)
+            if not p:
+                print("Produk tidak ditemukan.")
+                return
+            new_name = input(f"Nama [{p.name}]: ").strip() or p.name
+            if not Validator.is_valid_name(new_name):
+                print("Nama tidak valid.")
+                return
+            new_price = input(f"Harga [{p.price}]: ").strip()
+            if new_price and not Validator.is_valid_int(new_price):
+                print("Harga tidak valid.")
+                return
+            new_stock = input(f"Stok [{p.stock}]: ").strip()
+            if new_stock and not Validator.is_valid_int(new_stock):
+                print("Stok tidak valid.")
+                return
+            p.name = new_name
+            if new_price: p.price = int(new_price)
+            if new_stock: p.stock = int(new_stock)
+            self._save()
+            print("Produk diperbarui.")
+        except Exception as e:
+            print("Error:", e)
+
+    def delete_product(self):
+        try:
+            self.list_products()
+            pid = int(input("Masukkan ID produk yang ingin dihapus: ").strip())
+            p = self.find(pid)
+            if not p:
+                print("Produk tidak ditemukan.")
+                return
+            confirm = input(f"Yakin hapus '{p.name}'? (y/n): ").strip().lower()
+            if confirm != 'y':
+                print("Dibatalkan.")
+                return
+            self.products = [x for x in self.products if x.id != pid]
+            self._save()
+            print("Produk dihapus.")
+        except Exception as e:
+            print("Error:", e)
